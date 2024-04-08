@@ -1,5 +1,16 @@
+import { MemberDataIF } from '@/lib/types';
+
+interface SalaryCalculatorProps {
+  current: string;
+  data: MemberDataIF;
+}
+
 const SalaryCalculator = () => {
-  return <div>SalaryCalculator</div>;
+  return (
+    <div>
+      <div>SalaryCalculator</div>
+    </div>
+  );
 };
 
 export default SalaryCalculator;
