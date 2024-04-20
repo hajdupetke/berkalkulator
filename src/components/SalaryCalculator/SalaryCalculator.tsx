@@ -43,7 +43,7 @@ const SalaryCalculator = ({ current, setCurrent }: SalaryCalculatorProps) => {
           />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5 my-5">
-          <Discounts />
+          <Discounts current={current} setCurrent={setCurrent} />
         </div>
       </div>
     </div>
