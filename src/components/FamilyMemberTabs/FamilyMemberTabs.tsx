@@ -31,13 +31,10 @@ const FamilyMemberTabs = ({
   };
 
   return (
-    <div className="flex gap-1">
-      {data.map((data: MemberDataIF) => {
-        return (
-          <div
-            className="bg-slate-200 px-1 py-1 rounded flex align-center items-center"
-            key={data.id}
-          >
+    <div className="flex gap-1 align-center items-center">
+      <div className="flex gap-1 bg-slate-200 px-1 py-1 rounded align-center items-center">
+        {data.map((data: MemberDataIF) => {
+          return (
             <Button
               className={cn(
                 'bg-slate-200 px-3 py-1 rounded text-black min-w-10',
@@ -45,13 +42,14 @@ const FamilyMemberTabs = ({
                   ? 'bg-white hover:bg-gray-100'
                   : 'hover:bg-slate-300'
               )}
+              key={data.id}
               onClick={(_) => setCurrent(data)}
             >
               {data?.name}
             </Button>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       <Button
         className="bg-slate-200 px-4 aspect-square h-full rounded flex align-center items-center  text-2xl text-black hover:bg-slate-300 "
         onClick={handleButtonClick}

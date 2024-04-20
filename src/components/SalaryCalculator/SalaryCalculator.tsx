@@ -2,7 +2,6 @@ import { MemberDataIF } from '@/lib/types';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import CurrencyInput from './components/CurrencyInput';
-import { Slider } from '../ui/slider';
 
 interface SalaryCalculatorProps {
   current: MemberDataIF;
@@ -32,7 +31,6 @@ const SalaryCalculator = ({ current, setCurrent }: SalaryCalculatorProps) => {
           <p className="text-slate-500">Add meg a családtag nevét!</p>
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5 my-5">
-          
           <CurrencyInput
             value={current}
             setValue={(value: number) => {
@@ -44,7 +42,6 @@ const SalaryCalculator = ({ current, setCurrent }: SalaryCalculatorProps) => {
           />
         </div>
       </div>
-      
     </div>
   );
 };

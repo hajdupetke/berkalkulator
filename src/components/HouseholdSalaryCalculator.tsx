@@ -15,7 +15,7 @@ const HouseholdSalaryCalculator = () => {
 
   return (
     <>
-      <header className="my-5 w-full">
+      <header className="my-5 self-start">
         <FamilyMemberTabs
           data={data}
           setData={(value: MemberDataIF) => {
