@@ -1,39 +1,61 @@
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
+import { MemberDataIF } from '@/lib/types';
+import { MouseEventHandler } from 'react';
 
 interface FamilyMemberTabsProps {
-  members: string[];
-  setMembers: (value: string) => void;
-  current: string;
-  setCurrent: (value: string) => void;
+  data: MemberDataIF[];
+  current: MemberDataIF;
+  setData: (value: MemberDataIF) => void;
+  setCurrent: (value: MemberDataIF) => void;
 }
 
 const FamilyMemberTabs = ({
-  members,
-  setMembers,
+  data,
   current,
+  setData,
   setCurrent,
 }: FamilyMemberTabsProps) => {
+  const handleButtonClick: MouseEventHandler = (event) => {
+    event.preventDefault();
+    const nextId = data[data.length - 1].id + 1;
+    const val = {
+      id: nextId,
+      name: '',
+      amount: 0,
+      discounts: [],
+    };
+
+    setData(val);
+    setCurrent(val);
+  };
+
   return (
     <div className="flex gap-1">
-      {members.map((value: string, index: number) => {
+      {data.map((data: MemberDataIF) => {
         return (
-          <div className="bg-slate-200 px-1 py-1 rounded align-center items-center">
+          <div
+            className="bg-slate-200 px-1 py-1 rounded flex align-center items-center"
+            key={data.id}
+          >
             <Button
               className={cn(
-                'bg-slate-200 px-3 py-1 rounded text-black',
-                value == current
+                'bg-slate-200 px-3 py-1 rounded text-black min-w-10',
+                data.id == current.id
                   ? 'bg-white hover:bg-gray-100'
                   : 'hover:bg-slate-300'
               )}
-              onClick={(event) => setCurrent(value)}
+              onClick={(_) => setCurrent(data)}
             >
-              {value}
+              {data?.name}
             </Button>
           </div>
         );
       })}
-      <Button className="bg-slate-200 px-4 aspect-square h-full rounded align-center items-center flex text-2xl text-black hover:bg-slate-300 ">
+      <Button
+        className="bg-slate-200 px-4 aspect-square h-full rounded flex align-center items-center  text-2xl text-black hover:bg-slate-300 "
+        onClick={handleButtonClick}
+      >
         +
       </Button>
     </div>

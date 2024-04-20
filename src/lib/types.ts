@@ -1,4 +1,5 @@
 export interface MemberDataIF {
+  id: number;
   name: string;
   amount: number;
   discounts: boolean[];

@@ -2,31 +2,50 @@ import FamilyMemberTabs from './FamilyMemberTabs/FamilyMemberTabs';
 import HouseholdSummary from './HouseholdSummary/HouseholdSummary';
 import SalaryCalculator from './SalaryCalculator/SalaryCalculator';
 import { MemberDataIF } from '@/lib/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { defaultValues } from '@/lib/defaultValues';
+
+const emptyData = {
+  id: -1,
+  name: '',
+  amount: -1,
+  discounts: [],
+  date: new Date(),
+  dependants: -1,
+  dependantsWithDiscount: -1,
+};
 
 const HouseholdSalaryCalculator = () => {
-  const [members, setMembers] = useState<string[]>(['Lajos', 'Sándor']);
-  const [currMember, setCurrent] = useState<string>('Lajos');
-  const [data, setData] = useState<MemberDataIF[]>([]);
+  const [data, setData] = useState<MemberDataIF[]>(defaultValues);
+  const [current, setCurrent] = useState<MemberDataIF>(data[0]);
 
-  const getCurrentData = () => {
-    const currentData = data.find((elem) => elem.name == currMember);
-
-    return currentData;
-  };
+  useEffect(() => {
+    setData(data.map((e) => (e.id == current.id ? current : e)));
+  }, [current]);
 
   return (
     <>
-      <header>
+      <header className="my-5 w-full">
         <FamilyMemberTabs
-          members={members}
-          setMembers={(value: string) => setMembers([...members, value])}
-          current={currMember}
-          setCurrent={(value: string) => setCurrent(value)}
+          data={data}
+          setData={(value: MemberDataIF) => {
+            setData([...data, value]);
+          }}
+          current={current}
+          setCurrent={(value: MemberDataIF) => {
+            setCurrent(value);
+            console.log(value);
+          }}
         />
       </header>
-      <main className="flex gap-5">
-        <SalaryCalculator />
+      <main className="flex gap-5 w-full">
+        <SalaryCalculator
+          current={current}
+          setCurrent={(value: MemberDataIF) => {
+            setCurrent(value);
+            setData(data.map((elem) => (elem.id === value.id ? value : elem)));
+          }}
+        />
         <HouseholdSummary />
       </main>
     </>
