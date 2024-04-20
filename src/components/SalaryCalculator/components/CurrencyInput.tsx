@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -17,7 +18,7 @@ const numberToCurrency = (num: number) => {
   });
 };
 
-/* Custom input for currency purposes */
+/* Custom component for currency purposes */
 const CurrencyInput = ({ value, setValue }: CurrencyInputProps) => {
   const [val, setVal] = useState<string>(numberToCurrency(value['amount']));
   const [type, setType] = useState<string>('text');
@@ -28,6 +29,14 @@ const CurrencyInput = ({ value, setValue }: CurrencyInputProps) => {
 
   const localStringToNumber = (s: String) => {
     return Number(String(s).replace(/[^0-9.,-]+/g, ''));
+  };
+
+  const buttonStyles = 'aspect-square bg-slate-800 text-white p-1';
+
+  const handleButtonClick = (multiplier: number) => {
+    const newValue = Math.round(value['amount'] + value['amount'] * multiplier);
+    setValue(newValue);
+    setVal(numberToCurrency(newValue));
   };
 
   return (
@@ -64,9 +73,35 @@ const CurrencyInput = ({ value, setValue }: CurrencyInputProps) => {
         max={500000}
         onValueChange={(e) => {
           setValue(e[0]);
-          setVal(numberToCurrency(value['amount']));
+          setVal(numberToCurrency(e[0]));
         }}
       />
+      <div className="flex gap-2 align-center justify-center">
+        <Button
+          className={buttonStyles}
+          onClick={(_) => handleButtonClick(-0.01)}
+        >
+          -1%
+        </Button>
+        <Button
+          className={buttonStyles}
+          onClick={(_) => handleButtonClick(-0.05)}
+        >
+          -5%
+        </Button>
+        <Button
+          className={buttonStyles}
+          onClick={(_) => handleButtonClick(0.01)}
+        >
+          +1%
+        </Button>
+        <Button
+          className={buttonStyles}
+          onClick={(_) => handleButtonClick(0.05)}
+        >
+          +5%
+        </Button>
+      </div>
     </>
   );
 };
