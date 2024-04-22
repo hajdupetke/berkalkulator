@@ -39,7 +39,9 @@ export function DatePicker({ date, setDate }: DatePickerProps) {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={(e) => setDate(e)}
+          onSelect={(e) => {
+            if (e < new Date()) setDate(e);
+          }}
           initialFocus
           locale={hu}
         />
