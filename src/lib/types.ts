@@ -4,6 +4,6 @@ export interface MemberDataIF {
   amount: number;
   discounts: boolean[];
   date?: Date;
-  dependants?: number;
-  dependantsWithDiscount?: number;
+  dependants: number;
+  dependantsWithDiscount: number;
 }

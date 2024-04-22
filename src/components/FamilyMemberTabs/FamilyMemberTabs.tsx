@@ -24,6 +24,8 @@ const FamilyMemberTabs = ({
       name: '',
       amount: 0,
       discounts: [],
+      dependants: 0,
+      dependantsWithDiscount: 0,
     };
 
     setData(val);

@@ -4,7 +4,7 @@ export const defaultValues = [
     name: 'Lajos',
     amount: 100000,
     discounts: [true, false, true, false],
-    dependants: 1,
+    dependants: 0,
     dependantsWithDiscount: 0,
   },
   {
@@ -20,7 +20,7 @@ export const defaultValues = [
     name: 'Péter',
     amount: 100000,
     discounts: [true, false, true, true],
-    dependants: 1,
+    dependants: 0,
     dependantsWithDiscount: 0,
   },
 ];

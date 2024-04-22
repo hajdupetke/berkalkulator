@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import DateModal from './DateModal';
 import { Badge, badgeVariants } from '@/components/ui/badge';
+import DependantsInput from './DependantsInput';
 
 interface DiscountsProps {
   current: MemberDataIF;
@@ -96,6 +97,18 @@ const Discounts = ({ current, setCurrent }: DiscountsProps) => {
         />
         <Label htmlFor="csaladi">Családi adókedvezmény</Label>
       </div>
+      {discounts[3] && (
+        <DependantsInput
+          dependants={current['dependants']}
+          setDependants={(value) =>
+            setCurrent({ ...current, dependants: value })
+          }
+          discounted={current['dependantsWithDiscount']}
+          setDiscounted={(value) => {
+            setCurrent({ ...current, dependantsWithDiscount: value });
+          }}
+        />
+      )}
     </>
   );
 };
