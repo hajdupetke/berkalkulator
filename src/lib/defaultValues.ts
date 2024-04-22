@@ -3,7 +3,7 @@ export const defaultValues = [
     id: 1,
     name: 'Lajos',
     amount: 100000,
-    discounts: [true, false, true, false],
+    discounts: [false, false, false, false],
     dependants: 0,
     dependantsWithDiscount: 0,
   },

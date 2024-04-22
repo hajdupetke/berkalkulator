@@ -6,17 +6,12 @@ import { useEffect, useState } from 'react';
 import DateModal from './DateModal';
 import { Badge, badgeVariants } from '@/components/ui/badge';
 import DependantsInput from './DependantsInput';
+import { diff_years } from '@/lib/utils';
 
 interface DiscountsProps {
   current: MemberDataIF;
   setCurrent: (value: MemberDataIF) => void;
 }
-
-const diff_years = (dt2: Date, dt1: Date) => {
-  let diff = (dt2.getTime() - dt1.getTime()) / 1000;
-  diff /= 60 * 60 * 24;
-  return Math.abs(Math.round(diff / 365.25));
-};
 
 const Discounts = ({ current, setCurrent }: DiscountsProps) => {
   const [discounts, setDiscounts] = useState<boolean[]>(current['discounts']);

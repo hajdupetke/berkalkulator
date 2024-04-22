@@ -3,6 +3,7 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import CurrencyInput from './components/CurrencyInput';
 import Discounts from './components/Discounts';
+import NetAmount from './components/NetAmount';
 
 interface SalaryCalculatorProps {
   current: MemberDataIF;
@@ -44,6 +45,9 @@ const SalaryCalculator = ({ current, setCurrent }: SalaryCalculatorProps) => {
         </div>
         <div className="grid w-full max-w-lg items-center gap-1.5 my-5">
           <Discounts current={current} setCurrent={setCurrent} />
+        </div>
+        <div className="flex flex-col  justify-center items-center gap-1.5 my-5">
+          <NetAmount current={current} />
         </div>
       </div>
     </div>
