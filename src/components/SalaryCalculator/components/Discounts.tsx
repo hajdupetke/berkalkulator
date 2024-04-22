@@ -2,12 +2,20 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { MemberDataIF } from '@/lib/types';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+
+import DateModal from './DateModal';
+import { Badge, badgeVariants } from '@/components/ui/badge';
 
 interface DiscountsProps {
   current: MemberDataIF;
   setCurrent: (value: MemberDataIF) => void;
 }
+
+const diff_years = (dt2: Date, dt1: Date) => {
+  let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+  diff /= 60 * 60 * 24;
+  return Math.abs(Math.round(diff / 365.25));
+};
 
 const Discounts = ({ current, setCurrent }: DiscountsProps) => {
   const [discounts, setDiscounts] = useState<boolean[]>(current['discounts']);
@@ -23,7 +31,7 @@ const Discounts = ({ current, setCurrent }: DiscountsProps) => {
     setDiscounts(current['discounts']);
   }, [current['name']]);
   return (
-    <div>
+    <>
       <h3 className="uppercase text-slate-950 font-bold my-2">Kedvezmények</h3>
 
       <div className="flex items-center space-x-2 my-2">
@@ -46,10 +54,27 @@ const Discounts = ({ current, setCurrent }: DiscountsProps) => {
         />
         <Label htmlFor="hazas">Friss házasok kedvezménye</Label>
         {discounts[1] == true && (
-          <Button className="p-1 text-xs/tight h-5">
-            {current.date ? 'Dátum hozzáadása' : 'Dátum módositása'}
-          </Button>
+          <DateModal
+            current={current}
+            setCurrent={(date) => {
+              setCurrent({
+                ...current,
+                date: date,
+              });
+            }}
+          />
         )}
+        {current['date'] &&
+          discounts[1] &&
+          (diff_years(current['date'], new Date()) <= 2 ? (
+            <Badge className={badgeVariants({ variant: 'green' })}>
+              Jogosult
+            </Badge>
+          ) : (
+            <Badge className={badgeVariants({ variant: 'red' })}>
+              Nem jogosult
+            </Badge>
+          ))}
       </div>
       <div className="flex items-center space-x-2 my-2">
         <Switch
@@ -71,7 +96,7 @@ const Discounts = ({ current, setCurrent }: DiscountsProps) => {
         />
         <Label htmlFor="csaladi">Családi adókedvezmény</Label>
       </div>
-    </div>
+    </>
   );
 };
 
