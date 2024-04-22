@@ -4,19 +4,12 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { MemberDataIF } from '@/lib/types';
 import { useEffect, useState } from 'react';
+import { numberToCurrency } from '@/lib/utils';
 
 interface CurrencyInputProps {
   value: MemberDataIF;
   setValue: (value: number) => void;
 }
-
-const numberToCurrency = (num: number) => {
-  return num.toLocaleString('hu-HU', {
-    currency: 'HUF',
-    style: 'currency',
-    maximumFractionDigits: 0,
-  });
-};
 
 /* Custom component for currency purposes */
 const CurrencyInput = ({ value, setValue }: CurrencyInputProps) => {

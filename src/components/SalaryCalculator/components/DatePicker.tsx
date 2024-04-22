@@ -40,7 +40,7 @@ export function DatePicker({ date, setDate }: DatePickerProps) {
           mode="single"
           selected={date}
           onSelect={(e) => {
-            if (e < new Date()) setDate(e);
+            if (e && e < new Date()) setDate(e);
           }}
           initialFocus
           locale={hu}

@@ -36,7 +36,7 @@ const HouseholdSalaryCalculator = () => {
             setData(data.map((elem) => (elem.id === value.id ? value : elem)));
           }}
         />
-        <HouseholdSummary />
+        <HouseholdSummary data={data} />
       </main>
     </>
   );

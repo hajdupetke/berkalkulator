@@ -6,6 +6,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const numberToCurrency = (num: number) => {
+  return num.toLocaleString('hu-HU', {
+    currency: 'HUF',
+    style: 'currency',
+    maximumFractionDigits: 0,
+  });
+};
+
 export const diff_years = (dt2: Date, dt1: Date) => {
   let diff = (dt2.getTime() - dt1.getTime()) / 1000;
   diff /= 60 * 60 * 24;
