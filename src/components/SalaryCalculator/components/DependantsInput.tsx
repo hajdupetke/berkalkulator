@@ -36,7 +36,9 @@ const DependantsInput = ({
       <Button
         className={buttonStyle}
         onClick={(_) => {
-          setDependants(dependants + 1);
+          if (dependants + 1 <= 3) {
+            setDependants(dependants + 1);
+          }
         }}
       >
         +
@@ -56,7 +58,8 @@ const DependantsInput = ({
       <Button
         className={buttonStyle}
         onClick={(_) => {
-          if (discounted + 1 <= dependants) setDiscounted(discounted + 1);
+          if (discounted + 1 <= dependants && discounted + 1 <= 3)
+            setDiscounted(discounted + 1);
         }}
       >
         +
