@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { MemberDataIF } from './types';
+import { useState, useEffect } from 'react';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -58,3 +59,20 @@ export function calculateNetAmount(data: MemberDataIF) {
   net += bonus;
   return net;
 }
+
+export const useLocalStorage = (initialValue: MemberDataIF[]) => {
+  const intilalizeState = () => {
+    const storedValue = localStorage.getItem('data');
+    return storedValue
+      ? (JSON.parse(storedValue) as MemberDataIF[])
+      : initialValue;
+  };
+
+  const [data, setData] = useState<MemberDataIF[]>(intilalizeState);
+
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data));
+  }, [data]);
+
+  return [data, setData] as const;
+};

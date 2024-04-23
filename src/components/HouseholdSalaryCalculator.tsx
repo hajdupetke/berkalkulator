@@ -4,9 +4,11 @@ import SalaryCalculator from './SalaryCalculator/SalaryCalculator';
 import { MemberDataIF } from '@/lib/types';
 import { useEffect, useState } from 'react';
 import { defaultValues } from '@/lib/defaultValues';
+import { useLocalStorage } from '@/lib/utils';
 
 const HouseholdSalaryCalculator = () => {
-  const [data, setData] = useState<MemberDataIF[]>(defaultValues);
+  const [data, setData] = useLocalStorage(defaultValues);
+  data;
   const [current, setCurrent] = useState<MemberDataIF>(data[0]);
 
   useEffect(() => {

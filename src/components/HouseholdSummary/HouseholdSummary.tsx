@@ -8,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table';
-import { useState } from 'react';
 import { calculateNetAmount, numberToCurrency } from '@/lib/utils';
 
 interface HouseholdProps {
@@ -16,8 +15,6 @@ interface HouseholdProps {
 }
 
 const HouseholdSummary = ({ data }: HouseholdProps) => {
-  const [sum, setSum] = useState<number>(0);
-
   const calculateSum = () => {
     const netSalaries = data.map((elem) => calculateNetAmount(elem));
 
@@ -39,7 +36,7 @@ const HouseholdSummary = ({ data }: HouseholdProps) => {
         <TableBody>
           {data.map((elem) => {
             return (
-              <TableRow>
+              <TableRow key={elem.id}>
                 <TableCell className="font-semibold">{elem['name']}</TableCell>
                 <TableCell>
                   {numberToCurrency(calculateNetAmount(elem))}
