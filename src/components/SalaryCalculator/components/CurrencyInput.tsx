@@ -39,6 +39,7 @@ const CurrencyInput = ({ value, setValue }: CurrencyInputProps) => {
         type={type}
         value={val}
         maxLength={20}
+        id="gross"
         onFocus={() => {
           setType('number');
           setVal(value['amount'].toString());

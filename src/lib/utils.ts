@@ -16,7 +16,7 @@ export const numberToCurrency = (num: number) => {
 };
 
 export const diff_years = (dt2: Date, dt1: Date) => {
-  let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+  let diff = (new Date(dt2).getTime() - new Date(dt1).getTime()) / 1000;
   diff /= 60 * 60 * 24;
   return Math.abs(Math.round(diff / 365.25));
 };

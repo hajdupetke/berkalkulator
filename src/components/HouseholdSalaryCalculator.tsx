@@ -8,8 +8,12 @@ import { useLocalStorage } from '@/lib/utils';
 
 const HouseholdSalaryCalculator = () => {
   const [data, setData] = useLocalStorage(defaultValues);
-  data;
   const [current, setCurrent] = useState<MemberDataIF>(data[0]);
+
+  const deleteCurrent = () => {
+    setData(data.filter((e) => e.id != current.id));
+    setCurrent(data[0]);
+  };
 
   useEffect(() => {
     setData(data.map((e) => (e.id == current.id ? current : e)));
@@ -30,13 +34,14 @@ const HouseholdSalaryCalculator = () => {
           }}
         />
       </header>
-      <main className="flex gap-5 w-full">
+      <main className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
         <SalaryCalculator
           current={current}
           setCurrent={(value: MemberDataIF) => {
             setCurrent(value);
             setData(data.map((elem) => (elem.id === value.id ? value : elem)));
           }}
+          deleteCurrent={deleteCurrent}
         />
         <HouseholdSummary data={data} />
       </main>

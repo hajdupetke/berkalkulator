@@ -23,7 +23,7 @@ const FamilyMemberTabs = ({
       id: nextId,
       name: '',
       amount: 0,
-      discounts: [],
+      discounts: [false, false, false, false],
       dependants: 0,
       dependantsWithDiscount: 0,
     };
